@@ -1,7 +1,6 @@
 .project
 .classpath
 /target/
-mvnw*
 .settings/
 # Compiled class file
 *.class
