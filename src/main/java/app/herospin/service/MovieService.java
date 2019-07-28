@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -66,11 +67,14 @@ public class MovieService {
 	}
 
 	public Movie pickARandomMovie(List<Long> movieIDs) {
-		Random random = new Random();
+		Long movieID = movieIDs.get(new Random().nextInt(movieIDs.size()));
+		return findMovieByID(movieID);
+	}
 
+	@Cacheable(value = "movieDetails", key = "#movieID")
+	public Movie findMovieByID(Long movieID) throws RestClientException {
 		HttpHeaders headers = CommonUtil.getCommonHeader();
-		String url = findOneMovieURL + "/"
-				+ movieIDs.get(random.nextInt(movieIDs.size()));
+		String url = findOneMovieURL + "/" + movieID;
 		UriComponentsBuilder builder = CommonUtil.getCommonURIBuilder(url,
 				apiKey);
 
@@ -78,7 +82,6 @@ public class MovieService {
 
 		HttpEntity<Movie> response = restTemplate.exchange(
 				builder.toUriString(), HttpMethod.GET, entity, Movie.class);
-
 		return response.getBody();
 	}
 

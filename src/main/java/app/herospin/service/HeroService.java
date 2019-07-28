@@ -29,9 +29,12 @@ public class HeroService {
 
 	@Value("${characterRepo.apis.listAll}")
 	private String listAllHeroURL;
+	
+	@Value("${characterRepo.pageSize}")
+	private String limit;
 
-	@Cacheable(value = "heroes", key = "{ #offset, #limit }")
-	public HeroPageResponse nextHeroPage(int offset, int limit) {
+	@Cacheable(value = "heroes", key = "{ #offset}")
+	public HeroPageResponse nextHeroPage(int offset) {
 
 		HttpHeaders headers = CommonUtil.getCommonHeader();
 		long ts = new Date().getTime();

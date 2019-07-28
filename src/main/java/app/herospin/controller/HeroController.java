@@ -20,11 +20,10 @@ public class HeroController {
 	@Autowired
 	private HeroService heroService;
 
-	@RequestMapping(path = "list/offset/{offset}/limit/{limit}", method = RequestMethod.GET)
+	@RequestMapping(path = "list/offset/{offset}", method = RequestMethod.GET)
 	public ResponseEntity<HeroPageResponse> nextMoviePage(
-			@PathVariable("offset") int offset,
-			@PathVariable("limit") int limit) {
-		HeroPageResponse heroPage = heroService.nextHeroPage(offset, limit);
+			@PathVariable("offset") int offset) {
+		HeroPageResponse heroPage = heroService.nextHeroPage(offset);
 		return new ResponseEntity<>(heroPage, HttpStatus.OK);
 	}
 
