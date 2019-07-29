@@ -1,4 +1,4 @@
-package app.herospin.exceptionHandler;
+package app.herospin.exceptionhandler;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,8 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
-@EqualsAndHashCode
 public class HeroSpinAppException extends Exception {
 
 	/**
@@ -17,4 +17,5 @@ public class HeroSpinAppException extends Exception {
 
 	@NonNull
 	final String errorMessage;
+
 }

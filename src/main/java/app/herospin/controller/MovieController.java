@@ -62,4 +62,11 @@ public class MovieController {
 		return new ResponseEntity<>(movie, HttpStatus.OK);
 	}
 
+	@RequestMapping(path = "poster/{posterID}", method = RequestMethod.GET)
+	public ResponseEntity<Object> nextMoviePage(
+			@PathVariable("posterID") String posterID) {
+		return new ResponseEntity<>(movieService.getPoster(posterID),
+				HttpStatus.OK);
+	}
+
 }

@@ -11,9 +11,9 @@ import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SpringBootApplication
-@EnableCaching
 @Slf4j
+@EnableCaching
+@SpringBootApplication
 public class HeroSpinServerApplication {
 
 	public static void main(String[] args) {
@@ -26,18 +26,18 @@ public class HeroSpinServerApplication {
 		return builder.build();
 	}
 
-	@Bean
-	JedisConnectionFactory jedisConnectionFactory() {
-		log.info("Jedis connection factory generated");
-		return new JedisConnectionFactory();
-	}
-
-	@Bean
-	public RedisTemplate<String, Object> redisTemplate() {
-		RedisTemplate<String, Object> template = new RedisTemplate<>();
-		template.setConnectionFactory(jedisConnectionFactory());
-		log.info("Redis template generated");
-		return template;
-	}
+//	@Bean
+//	JedisConnectionFactory jedisConnectionFactory() {
+//		log.info("Jedis connection factory generated");
+//		return new JedisConnectionFactory();
+//	}
+//
+//	@Bean
+//	public RedisTemplate<String, Object> redisTemplate() {
+//		RedisTemplate<String, Object> template = new RedisTemplate<>();
+//		template.setConnectionFactory(jedisConnectionFactory());
+//		log.info("Redis template generated");
+//		return template;
+//	}
 
 }

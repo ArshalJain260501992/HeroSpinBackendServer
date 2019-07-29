@@ -2,16 +2,14 @@ server:
   port: 1234
 
 movieRepo: 
-    apiKey: "eca5e0be68fdba88825606937300d847"
     apis: {
          listAll: "https://api.themoviedb.org/3/movie/557/similar",
          findOne: "https://api.themoviedb.org/3/movie/",
-         findRelevant: "https://api.themoviedb.org/3/search/movie"
+         findRelevant: "https://api.themoviedb.org/3/search/movie",
+         posterURL: "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
     }
     
 characterRepo:
-    apiKey: "fd7015abcc113e71742a9e4de690e18c"
-    privateKey: "15ace9ae12eeb6b81e0bed896ed21c0b4fee5443"
     pageSize: 15
     apis: {
          listAll: "https://gateway.marvel.com:443/v1/public/characters"
@@ -32,3 +30,6 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file: application.log   
+jasypt:
+  encryptor:
+       password: visa@assignment

@@ -21,15 +21,15 @@ public class HeroService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Value("${characterRepo.apiKey}")
+	@Value("${enc.characterRepo.apiKey}")
 	private String apiKey;
 
-	@Value("${characterRepo.privateKey}")
+	@Value("${enc.characterRepo.privateKey}")
 	private String privateKey;
 
 	@Value("${characterRepo.apis.listAll}")
 	private String listAllHeroURL;
-	
+
 	@Value("${characterRepo.pageSize}")
 	private String limit;
 

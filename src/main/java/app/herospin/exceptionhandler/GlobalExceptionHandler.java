@@ -1,4 +1,4 @@
-package app.herospin.exceptionHandler;
+package app.herospin.exceptionhandler;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -15,10 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<Exception> handleException(Exception ex) {
+	@ExceptionHandler(HeroSpinAppException.class)
+	protected ResponseEntity<Error> handleException(HeroSpinAppException ex) {
 		Error error = new Error("Service request failed");
-		log.error("{}", error, ex);
-		return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
+		log.error("{}", ex);
+		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

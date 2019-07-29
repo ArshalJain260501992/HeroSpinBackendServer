@@ -11,8 +11,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -33,7 +33,7 @@ public class MovieService {
 	@Autowired
 	private MovieService movieServiceProxy;
 
-	@Value("${movieRepo.apiKey}")
+	@Value("${enc.movieRepo.apiKey}")
 	private String apiKey;
 
 	@Value("${movieRepo.apis.listAll}")
@@ -44,6 +44,9 @@ public class MovieService {
 
 	@Value("${movieRepo.apis.findRelevant}")
 	private String findRelevantMovieURL;
+
+	@Value("${movieRepo.apis.posterURL}")
+	private String posterURL;
 
 	@Cacheable(value = "movies", key = "#pageNo")
 	public MoviePageResponse nextMoviePage(int pageNo) {
@@ -72,7 +75,7 @@ public class MovieService {
 	}
 
 	@Cacheable(value = "movieDetails", key = "#movieID")
-	public Movie findMovieByID(Long movieID) throws RestClientException {
+	public Movie findMovieByID(Long movieID) {
 		HttpHeaders headers = CommonUtil.getCommonHeader();
 		String url = findOneMovieURL + "/" + movieID;
 		UriComponentsBuilder builder = CommonUtil.getCommonURIBuilder(url,
@@ -139,6 +142,18 @@ public class MovieService {
 				MoviePageResponse.class);
 
 		return response.getBody();
+	}
+
+	@Cacheable(value = "moviePosters", key = "{#posterID}")
+	public byte[] getPoster(String posterID) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.IMAGE_JPEG_VALUE);
+		UriComponentsBuilder builder = CommonUtil
+				.getCommonURIBuilder(posterURL + "/" + posterID, apiKey);
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+
+		return restTemplate.exchange(builder.toUriString(), HttpMethod.GET,
+				entity, byte[].class).getBody();
 	}
 
 }
