@@ -33,7 +33,8 @@ To successfully get this project up and running one has to clone the repository.
 * To Build the project with Maven: 
   > mvn clean install
 * To run the reddis cache
-  > click on the reddis.server.exe file to start reddis server
+  > install latest reddis
+  > run the reddis.server.exe file (double clicking will work)
 * To run the project
   > mvn spring-boot:run
 
