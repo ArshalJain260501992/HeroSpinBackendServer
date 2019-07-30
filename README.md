@@ -12,8 +12,8 @@ Kindly note, the hybrid app is working and one has to deploy the UI project loca
 * It is a Spring Boot project, very light weight
 * It uses reddis cache, so the processing time of request is very less and the performance is good.
 
-## Limitations
-* Cache clearance policy is not set
+## Feature Debt
+* Cache eviction policy is not set
 * Java-Docs for the project are in Progress
 
 ## Getting Started
